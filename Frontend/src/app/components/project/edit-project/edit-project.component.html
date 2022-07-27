@@ -1,0 +1,39 @@
+<!----------------- Editing Department Data modal -----------------> 
+
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title-edit">Update Project</h4>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="editForm">
+        <input type="hidden" class="form-control" formControlName="projectId">
+        <div class="form-group">
+          <label>Project name:</label>
+          <div class="input-group">
+            <input class="form-control" formControlName="name">
+          </div>
+          <div>
+          <span class="text-danger" *ngIf="!editForm.get('name')?.valid &&
+            editForm.get('name')?.touched">Please Enter the Project name!
+          </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Department:</label>
+          <div class="input-group">
+            <select formControlName="department">
+              <option *ngFor="let department of departments" [ngValue]="department" [selected]="department.name==selectedDepartment" >
+              {{department.name }} {{department.name==selectedDepartment}}
+              </option>
+            
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button data-dismiss="modal" class="btn btn-info" (click)="onSave(editForm.value)">Save changes</button>
+            <button  type="button" class="btn btn-danger" (click)="onClose()">Close</button>
+          </div>
+      </form>
+    </div>
+
+  <!----------------- End editing Data modal -----------------> 
+  

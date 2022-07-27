@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <app-sidebar></app-sidebar>
+      </div>
+        <div class="col-md-8">
+            <div class="border">
+                <button class="btn btn-md btn-outline-primary  float-left" (click)="open(content)">
+                  <i class="fa fa-plus"></i>New Department</button>
+                  <a routerLink="/" class=" btn btn-warning float-right"><i class="fa fa-home"></i> back to Home</a>
+              </div>
+             
+            
+              
+            <table class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>ID</th>
+                <th>Department Name</th>
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let department of departments;let i = index">
+                <td><span>{{i+1}}</span></td>
+                <td><span>{{department.name}}</span></td>
+                <td>
+                    <button class="btn btn-sm btn-warning" (click)="openEdit(department)">
+                      <i class="fa fa-edit"></i>Edit</button>
+                    <button class="btn btn-sm btn-danger" (click)="openDelete(contentDelete, department)">
+                      <i class="fa fa-remove"></i>Delete</button>
+                  </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+   
+   <!----------------- Inserting Data modal -----------------> 
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">New Department</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+          <div class="form-group">
+            <label for="name">Department name:</label>
+            <div class="input-group">
+              <input type="text" id="name" class="form-control" name="name" ngModel required="Please add department name">
+            </div>
+          </div>
+            <div class="modal-footer">
+              <button data-dismiss="modal" class="btn btn-info" [disabled]="!f.valid">Submit</button>
+              <button  type="button" class="btn btn-danger" (click)="modal.close('Save click')">Close</button>
+            </div>
+        </form>
+      </div>
+    </ng-template>
+  <!----------------- End Inserting Data modal -----------------> 
+
+
+   
+
+  <!----------------- Deleteing  modal -----------------> 
+  <ng-template #contentDelete let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">Confirm Delete</h5>
+    </div>
+    <div class="modal-body text-center text-danger">
+      <h6>Are you sure you want to delete this record?</h6>
+    </div>
+    <div class="modal-footer">
+      <button data-dismiss="modal" class="btn btn-danger" (click)="onDelete()">Yes, Delete!</button> 
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+    </div>
+  </ng-template>
